@@ -1,6 +1,5 @@
 //HEADER STUFF
 
-
 //nathanael meyers
 //alan dunn
 //swag swag swag swag swag
@@ -14,9 +13,21 @@ class node
 {
 public:
   typedef double value_type;
+  //this magic constructor below
+  //if no args are passed this format sets the values to 0 and NULL respectively
+  node(const value_type& init_data = value_type( ),const node* init_link = NULL);
+
+  void set_data(const value_type& new_data);
+  void set_link(node* new_link);
+
+  value_type data();
+  node* link();
+
+  size_t list_length(const node* head_ptr);
+  
 private:
-  value_type data;
-  node *link;
+  value_type data_field;
+  node *link_field;
 };
 
 class sequence
@@ -44,7 +55,9 @@ private:
 //bam heres the array of doubles
 //AHHHHHHH
   node *head_ptr;
-  node *tail_ptr
+  node *tail_ptr;
+  node *current_node_ptr;
+  node *previous_node_ptr;
   value_type data[CAPACITY];
 //used keeps track of how many spaces are currently being used
   size_type used;

@@ -4,8 +4,7 @@
 #include "header.h"
 
 
-//DAT CONSTRUCTOR DO OH SNAP BOI
-
+//node class
 node::node(const value_type& init_data = value_type( ),node* init_link = NULL)
 {
   data_field = init_data;
@@ -22,6 +21,33 @@ void node::set_link(node* new_link)
   link_field = new_link;
 }
 
+value_type node::data()
+{
+  return data_field;
+}
+
+node* node::link()
+{
+  return link_field;
+}
+
+size_t node::list_length()
+{
+  // Precondition: head_ptr is the head pointer of a linked list.
+// Postcondition: The value returned is the number of nodes in the linked list.
+// Library facilities used: cstdlib
+
+  const node *cursor;
+  size_t answer;
+  answer = 0;
+  for (cursor = head_ptr; cursor != NULL; cursor = cursor->link( ))
+  ++answer;
+  return answer;
+
+}
+
+
+//sequence class
 sequence::sequence()
 {
   used = 0;
