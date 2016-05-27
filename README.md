@@ -1,2 +1,2 @@
-# 5.4assignment
-sequence class with linked list
+#5.4 Assignment
+cs2420 - assignment 5.4
