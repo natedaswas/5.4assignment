@@ -6,6 +6,22 @@
 
 //DAT CONSTRUCTOR DO OH SNAP BOI
 
+node::node(const value_type& init_data = value_type( ),node* init_link = NULL)
+{
+  data_field = init_data;
+  link_field = init_link;
+}
+
+void node::set_data(const value_type& new_data)
+{
+  data_field = new_data;
+}
+
+void node::set_link(node* new_link)
+{
+  link_field = new_link;
+}
+
 sequence::sequence()
 {
   used = 0;
@@ -15,6 +31,9 @@ sequence::sequence()
 //RESETS THE INDEX TO 0 SO YOU CAN START RETRIEVING THINGS
 void sequence::start()
 {
+  //incorrect pointer syntax?
+  head_ptr = NULL;
+  tail_ptr = NULL;
 	current_index = 0;
 	return;
 }
