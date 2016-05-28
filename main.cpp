@@ -50,6 +50,11 @@ size_t node::list_length()
 //sequence class
 sequence::sequence()
 {
+  //sequence is called, everything initialized to 0 and null
+  head_ptr = NULL;
+  tail_ptr = NULL;
+  current_node_ptr = NULL;
+  previous_node_ptr = NULL;
   used = 0;
   current_index = 0;
 }
@@ -57,29 +62,56 @@ sequence::sequence()
 //RESETS THE INDEX TO 0 SO YOU CAN START RETRIEVING THINGS
 void sequence::start()
 {
+  if (!head_ptr)
+  {
+    cout << "Unable to start, no nodes created. Try insert or attach." << endl;
+    return;
+  }
+  else
+  {
+  cout << "You are now working with the first element of the sequence." << endl;
   //incorrect pointer syntax?
-  head_ptr = NULL;
-  tail_ptr = NULL;
-	current_index = 0;
+  current_node_ptr = head_ptr;
+  previous_node_ptr = NULL;
+	//current_index = 0; Not needed???
 	return;
+  }
 }
 
 //INCREASES THE CURRENT INDEX BY 1!!! WOW!!!
 void sequence::advance()
 {
-	current_index++;
-  cout << "index: " << current_index << endl;
+  if (!head_ptr)
+  {
+    cout << "Unable to advance, no nodes created. Try insert or attach." << endl;
+    return;
+  }
+  //if the link function does not return NULL
+  //change the previous node pointer so I dont lose it
+  if (current_node_ptr->link())
+  {
+  current_node_ptr = (current_node_ptr->link());
+  previous_node_ptr = (previous_node_ptr->link())
+  }
+  else
+  cout << "You have reached the end of the list" << endl;
 	return;
 }
 
 //UMM IM GUESS WE INSERT A NEW THING AT THE CURRENT INDEX
 void sequence::insert(const double& entry)
 {
-  cout << "we totally just got into the insert method" << endl;
 	//precondition (size < capacity)
-	if (current_index >= used)
+  value_type insert_value;
+  cout << "Value to be placed in new node: " << endl;
+  cin >> insert_value;
 
-  {cout << "looks like current index is at nothing so lets just set that number to the current index" << endl;
+  node* woohoo = new node(insert_value = value_type( ),current_node_ptr);
+  previous_node_ptr = woohoo;
+
+
+
+  cout << "looks like current index is at nothing so lets just set that number to the current index" << endl;
 	data[current_index] = entry;}
 	else
 	{
@@ -97,7 +129,7 @@ void sequence::insert(const double& entry)
 //YEAH NO CLUE
 void sequence::attach(const double& entry)
 {
-  cout << "woohoo totes the attach function" << endl;
+  cout << "the attach function" << endl;
 	//precondition (size < capacity)
         if (current_index >= used)
         {
