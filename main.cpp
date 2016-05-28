@@ -7,6 +7,7 @@
 //node class
 node::node(const value_type& init_data,node* init_link)
 {
+  cout << "Making a new node here. Value: " << init_data << endl;
   data_field = init_data;
   link_field = init_link;
 }
@@ -31,7 +32,7 @@ node* node::link()
   return link_field;
 }
 
-size_t node::list_length(node* head_ptr)
+size_t sequence::list_length()
 {
   // Precondition: head_ptr is the head pointer of a linked list.
 // Postcondition: The value returned is the number of nodes in the linked list.
@@ -86,6 +87,11 @@ void sequence::advance()
     cout << "Unable to advance, no nodes created. Try insert or attach." << endl;
     return;
   }
+  if (!current_node_ptr->link())
+  {
+    cout << "Nope, you've gone far enough." << endl;
+    return;
+  }
   //if the link function does not return NULL
   //change the previous node pointer so I dont lose it
   if (current_node_ptr->link())
@@ -102,12 +108,37 @@ void sequence::advance()
 void sequence::insert(const double& entry)
 {
 	//precondition (size < capacity)
-  double insert_value;
-  cout << "Value to be placed in new node: " << endl;
-  cin >> insert_value;
+  //double insert_value;
+  //cout << "Value to be placed in new node: " << endl;
+  //cin >> insert_value;
 
-  node* woohoo = new node(insert_value = value_type( ),current_node_ptr);
-  previous_node_ptr = woohoo;
+  //if head pointer is null then this is the first thing
+  if (!head_ptr)
+  {
+    node* woohoo = new node(entry/* = value_type()*/,current_node_ptr);
+    head_ptr = woohoo;
+    tail_ptr = woohoo;
+    current_node_ptr = woohoo;
+  }
+
+  //if this is true then this is the second thing
+  else if (head_ptr == current_node_ptr)
+  {
+    node* woohoo = new node(entry/* = value_type()*/,current_node_ptr);
+    head_ptr = woohoo;
+    tail_ptr = current_node_ptr;
+    previous_node_ptr = woohoo;
+  }
+
+  //and this covers everything else
+  else
+  {
+    node* woohoo = new node(entry/* = value_type()*/,current_node_ptr);
+    //need to set previous to this new one
+    previous_node_ptr->set_link(woohoo);
+    previous_node_ptr = woohoo;
+
+  }
 
 
 
@@ -168,10 +199,10 @@ void sequence::remove_current()
 }
 
 //getter for the size of our sequence
-size_t sequence::size() const
+/*size_t sequence::size() const
 {
         return used;
-}
+}*/
 
 bool sequence::is_item() const
 {

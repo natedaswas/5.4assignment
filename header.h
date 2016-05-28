@@ -24,7 +24,6 @@ public:
   //this is the pointer to the next thing
   node* link();
 
-  size_t list_length(node* head_ptr);
 
 private:
   value_type data_field;
@@ -49,9 +48,10 @@ public:
   void remove_current( );
 // CONSTANT MEMBER FUNCTIONS
 //GETTERS
-  size_type size( ) const;
+  //size_type size( ) const;
   bool is_item( ) const;
   value_type current( ) const;
+  size_t list_length();
 private:
   node *head_ptr;
   node *tail_ptr;

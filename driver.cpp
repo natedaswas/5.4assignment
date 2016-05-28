@@ -52,7 +52,7 @@ int main( )
                       break;
             case 'P': show_sequence(test);
                       break;
-            case 'S': cout << "Size is " << test.size( ) << '.' << endl;
+            case 'S': cout << "Size is " << test.list_length( ) << '.' << endl;
                       break;
             case 'I': test.insert(get_number( ));
                       break;
