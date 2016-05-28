@@ -15,16 +15,16 @@ public:
   typedef double value_type;
   //this magic constructor below
   //if no args are passed this format sets the values to 0 and NULL respectively
-  node(const value_type& init_data = value_type( ),const node* init_link = NULL);
+  node(const value_type& init_data = value_type( ),node* init_link = NULL);
   ~node();
   void set_data(const value_type& new_data);
   void set_link(node* new_link);
 
-  value_type data();
+  double data();
   //this is the pointer to the next thing
   node* link();
 
-  size_t list_length(const node* head_ptr);
+  size_t list_length(node* head_ptr);
 
 private:
   value_type data_field;
