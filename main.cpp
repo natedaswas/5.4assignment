@@ -140,21 +140,6 @@ void sequence::insert(const double& entry)
 
   }
 
-
-
-  /*cout << "looks like current index is at nothing so lets just set that number to the current index" << endl;
-	data[current_index] = entry;}
-	else
-	{
-	  for (int i = used; i > current_index; i--)
-	  {
-	  data[i] = data[i -1];
-	  }
-	data[current_index] = entry;
-	}
-	used++;
-  cout << "incrementing the used variable to: " << used << endl;
-  cout << "And now straight from the array: " << data[current_index] << endl;*/
 }
 
 //YEAH NO CLUE
@@ -185,54 +170,39 @@ void sequence::attach(const double& entry)
 
   }
 
-
-
-
-
-
-  /*cout << "the attach function" << endl;
-	//precondition (size < capacity)
-        if (current_index >= used)
-        {
-        data[current_index] = entry;
-        cout << "Looks like this is the first thing to enter: " << entry << endl;
-        }
-        else
-        {
-          for (int i = used; i > (current_index + 1); i--)
-          {
-          data[i] = data[i -1];
-          }
-        data[current_index + 1] = entry;
-        }
-        used++;
-
-        cout << "incrementing the used variable to: " << used << endl;
-        cout << "And now straight from the array: " << data[current_index] << endl;*/
 }
 
 //MAYBE THIS ONE REMOVES THE CURRENT SOMETHING
 void sequence::remove_current()
 {
-  if (!is_item())
-  return;
-  if (used > 0)
+  if (!head_ptr)
   {
-    for (int i = current_index; i < used; i++)
-    {
-      data[i] = data[i + 1];
-    }
-    used--;
+    cout << "nothing to remove." << endl;
+    return;
   }
+  else if ((current_node_ptr) && (!current_node_ptr->link()))
+  {
+    //set the previous nodes link to NULL
+    previous_node_ptr->set_link(NULL);
+    //set tail pointer to previous
+    tail_ptr = previous_node_ptr;
+    //we will need to use this loop to walk through and find the now previous thingy
+    //otherwise we will lose it and screw everything up
+    node *cursor;
+    node *ahead_cursor;
+    for (cursor = head_ptr; cursor != NULL; cursor = cursor->link( ))
+    {
+      ahead_cursor = cursor->link();
+      if (ahead_cursor->link() = NULL)
+      {
+        previous_node_ptr = cursor;
+        break;
+      }
+    }
 
+  }
 	return;
 }
-
-//getter for the size of our sequence
-/*size_t sequence::size() const
-{
-        return used;
-}*/
 
 bool sequence::is_item() const
 {
