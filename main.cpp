@@ -87,14 +87,14 @@ void sequence::advance()
     cout << "Unable to advance, no nodes created. Try insert or attach." << endl;
     return;
   }
-  if (!current_node_ptr->link())
+  else if (!current_node_ptr->link())
   {
     cout << "Nope, you've gone far enough." << endl;
     return;
   }
   //if the link function does not return NULL
   //change the previous node pointer so I dont lose it
-  if (current_node_ptr->link())
+  else if(current_node_ptr->link())
   {
   current_node_ptr = (current_node_ptr->link());
   previous_node_ptr = (previous_node_ptr->link());
@@ -160,7 +160,37 @@ void sequence::insert(const double& entry)
 //YEAH NO CLUE
 void sequence::attach(const double& entry)
 {
-  cout << "the attach function" << endl;
+  if (!head_ptr)
+  {
+    node* woohoo = new node(entry/* = value_type()*/,current_node_ptr);
+    head_ptr = woohoo;
+    tail_ptr = woohoo;
+    current_node_ptr = woohoo;
+  }
+
+  //if this is true then this is the second thing
+  //so if the current node pointer is not but its the last
+  else if ((current_node_ptr) && (!current_node_ptr->link()))
+  {
+    node* woohoo = new node(entry/* = value_type()*/,NULL);
+    tail_ptr = woohoo;
+    current_node_ptr->set_link(woohoo);
+  }
+
+  //and this covers everything else
+  else
+  {
+    node* woohoo = new node(entry/* = value_type()*/,current_node_ptr->link());
+    current_node_ptr->set_link(woohoo);
+
+  }
+
+
+
+
+
+
+  /*cout << "the attach function" << endl;
 	//precondition (size < capacity)
         if (current_index >= used)
         {
@@ -178,7 +208,7 @@ void sequence::attach(const double& entry)
         used++;
 
         cout << "incrementing the used variable to: " << used << endl;
-        cout << "And now straight from the array: " << data[current_index] << endl;
+        cout << "And now straight from the array: " << data[current_index] << endl;*/
 }
 
 //MAYBE THIS ONE REMOVES THE CURRENT SOMETHING
